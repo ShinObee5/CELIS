@@ -1,12 +1,16 @@
 .carousel-item{
-    height: 200px;
-    width: auto;
+    height: 100%;
+    width: 100%;
     align-self: center;
-    margin: auto;
+    margin-left: auto;
   } 
   .carousel-item img{
-    height: 200px;
-    width: auto;
+    height: 100%;
+    width: 100%;
     margin: auto;
   }
+.bd-example
+{
+    margin-left: auto;
+}
   
