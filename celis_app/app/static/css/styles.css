@@ -1,0 +1,12 @@
+.carousel-item{
+    height: 200px;
+    width: auto;
+    align-self: center;
+    margin: auto;
+  } 
+  .carousel-item img{
+    height: 200px;
+    width: auto;
+    margin: auto;
+  }
+  
