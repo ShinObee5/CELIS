@@ -10,4 +10,4 @@ from flask import request,redirect,url_for,render_template,flash
 
 @app.route('/basetemplate')
 def base():
-    return render_template('template.html',title='template')
+    return render_template('celis.html',title='template')

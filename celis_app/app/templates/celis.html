@@ -4,17 +4,17 @@
         <title>CELIS</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-     
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../static/css/styles.css">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        
+
     </head>
     <body>
-      
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"><img src="" width="30" height="30" class="d-inline-block align-top" alt="">CELIS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,21 +51,21 @@
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="bg.jpg" class="d-block w-100" alt="bg.jpg">
+                  <img src="{{url_for('static',filename='images/home/bg.jpg')}}" class="d-block w-100" alt="Hey There">
                   <div class="carousel-caption d-none d-md-block">
                     <h5>Course 1</h5>
                     <p>Course Details.</p>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="bg.jpg" class="d-block w-100" alt="bg.jpg">
+                  <img src="{{url_for('static',filename='images/home/img(11).jpg')}}" class="d-block w-100" alt="Welcome">
                   <div class="carousel-caption d-none d-md-block">
                     <h5>Course 2</h5>
                     <p>Course Details.</p>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="bg.jpg" class="d-block w-100" alt="bg.jpg">
+                  <img src="{{url_for('static',filename='images/home/img(11).jpg')}}" class="d-block w-100" alt="bg.jpg">
                   <div class="carousel-caption d-none d-md-block">
                     <h5>Course 3</h5>
                     <p>Course Details..</p>
@@ -82,6 +82,6 @@
               </a>
             </div>
           </div>
-      
+
     </body>
 </html>
