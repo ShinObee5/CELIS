@@ -1,6 +1,5 @@
 .carousel-item{
-    height: 100%;
-    width: 100%;
+    
     align-self: center;
     margin-left: auto;
   } 
@@ -12,5 +11,11 @@
 .bd-example
 {
     margin-left: auto;
+}
+.bd-example{
+    display: block;
+    height: 176px;
+    width: 1292px;
+    margin:auto;
 }
   
