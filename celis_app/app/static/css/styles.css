@@ -1,11 +1,11 @@
 .carousel-item{
     
     align-self: center;
-    margin-left: auto;
+    align-content: center;
   } 
   .carousel-item img{
-    height: 100%;
-    width: 100%;
+    height: 50%;
+    width: 50%;
     margin: auto;
   }
 .bd-example
@@ -23,9 +23,21 @@
 padding-right: 10px;
 }
 body{
-  padding-top: 10px;
+  padding-top: 5px;
   z-index: 0;
 }
 .navbar-dark {
-  background-color: darkmagenta;
+  background-color:bisque ;
+}
+footer{
+  background-color:whitesmoke;
+  z-index:1;
+  border-top-style:double;
+  border-color: black;
+  padding-top: 1px;
+  margin-top: 10px;;
+}
+.footer-copyright {
+  text-emphasis-color: black;
+  text-decoration-color: black;
 }
