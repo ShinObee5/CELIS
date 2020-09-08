@@ -1,8 +1,8 @@
 .carousel-item{
-    
+
     align-self: center;
     align-content: center;
-  } 
+  }
   .carousel-item img{
     height: 50%;
     width: 50%;
@@ -23,7 +23,7 @@
 padding-right: 10px;
 }
 body{
-  padding-top: 5px;
+  padding-top: 0px;
   z-index: 0;
 }
 .navbar-dark {
