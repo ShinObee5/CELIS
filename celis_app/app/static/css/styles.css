@@ -41,3 +41,16 @@ footer{
   text-emphasis-color: black;
   text-decoration-color: black;
 }
+
+.footbut {
+  background-color: black;
+  border-color: white;
+  color: white;
+  font-size: 20px;
+}
+
+footer p{
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+}
