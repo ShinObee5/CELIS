@@ -3,6 +3,10 @@
     align-self: center;
     align-content: center;
   }
+form p {
+    list-style:none;
+
+  }
   .carousel-inner{
   width:1100px;
   max-height: 400px;
