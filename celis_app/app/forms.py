@@ -5,7 +5,8 @@ from wtforms.validators import DataRequired,Email,EqualTo
 
 
 class LoginForm(FlaskForm):
-    username=EmailField('Username',validators=[DataRequired(),Email()])
+    username=StringField('Username',validators=[DataRequired()])
+    email=EmailField('Email',validators=[DataRequired(),Email()])
     password=PasswordField('Password',validators=[DataRequired()])
     conpassword=PasswordField('Re-Enter Password',validators=[DataRequired(),EqualTo('password')])#('values','label')
     user_role=RadioField('User Role',validators=[DataRequired()],choices=[('Student','Student'),('Instructor','Instructor')])
