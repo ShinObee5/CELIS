@@ -52,13 +52,17 @@
 
         </div>
       </nav>
-      {% with messages=get_flashed_messages() %}
+      {% with messages=get_flashed_messages(with_categories=true) %}
       {% if messages %}
-      <ul>
-        {%for message in messages%}
-        <li>{{message}}</li>
+        {%for category,message in messages%}
+        <div class="container">
+          <div class="alert alert-{{category}} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close" name="button"><span aria-hidden="true">&times;</span></button>
+            {{message}}
+          </div>
+        </div>
+
         {%endfor%}
-      </ul>
       {%endif%}
       {%endwith%}
 

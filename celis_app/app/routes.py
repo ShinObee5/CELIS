@@ -33,7 +33,7 @@ def login():
     if form.validate_on_submit():
         user=User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid Email or Password')
+            flash('Invalid Email or Password',category="danger")
             return redirect(url_for('login'))
         login_user(user,remember=form.remember_me.data)
         next_page=request.args.get('next')
@@ -59,7 +59,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Successfully Registered')
+        flash('Successfully Registered',category="success")
         print(form.password.data)
         print(form.user_role.data)
         print(form.Region.data)
