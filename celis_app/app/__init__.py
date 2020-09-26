@@ -11,4 +11,6 @@ db=SQLAlchemy(app)
 migrate=Migrate(app,db)
 login=LoginManager(app)
 login.login_view='login'
+login.message='Please Login To Access The Page'
+login.login_message_category='info'
 from app import routes,models

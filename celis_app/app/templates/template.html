@@ -22,6 +22,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
             <li class="nav-item ">
               <a class="nav-link" href="{{url_for('index')}}">Home </a>
             </li>
@@ -30,18 +31,25 @@
             </li>
             {% if current_user.is_anonymous %}
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('login')}}">SignIn</a>
+              <a class="nav-link" href="{{url_for('login')}}">SignIn/SignUp</a>
             </li>
             {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{{url_for('logout')}}">SignOut</a>
             </li>
             {% endif %}
-            {% if current_user.is_anonymous %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{url_for('register')}}">SignUp</a>
-            </li>
-            {%endif%}
+            {% if current_user.is_authenticated %}
+            <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Hey, {{current_user.username}}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Profile</a>
+        <a class="dropdown-item" href="#">Discussion Forums</a>
+        <a class="dropdown-item" href="#">Settings</a>
+      </div>
+    </li>
+            {% endif %}
           </ul>
           <form class="form-inline ml-auto">
         <div class="md-form my-0">
