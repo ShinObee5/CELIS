@@ -14,4 +14,5 @@ Procedure for Executing and Testing
   flask_migrate
   flask_login
   flask_wtf
+  flask email_validator
   
