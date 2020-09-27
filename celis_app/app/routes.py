@@ -2,7 +2,7 @@ from app import app
 from flask import request,redirect,url_for,render_template,flash,get_flashed_messages,flash
 from app import forms
 from flask_login import current_user,login_user,logout_user,login_required
-from app.models import User
+from app.models import User,thread
 from app.forms import LoginForm,RegisterForm
 from werkzeug.urls import url_parse
 from app import db
@@ -68,9 +68,12 @@ def register():
 
 @app.route('/forum')
 def forum():
-    return render_template('forumhome.html',title='Forum')
+    threads=thread.query.all()
+    return render_template('forumhome.html',title='Forum',threads=threads)
 
-
+@app.route('/thread')
+def forum_():
+    return render_template('forum.html',title='Forum')
 
 @app.route('/contact')
 def contactus():

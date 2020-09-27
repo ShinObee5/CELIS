@@ -29,6 +29,7 @@ class User(UserMixin,db.Model):
 class thread(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     subject=db.Column(db.String(50))
+    description=db.Column(db.String(100))
     created=db.Column(db.DateTime,index=True,default=datetime.utcnow)
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
     posts=db.relationship('post',backref='BelongsTo',lazy='dynamic')
