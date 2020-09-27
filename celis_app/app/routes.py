@@ -66,6 +66,11 @@ def register():
         return redirect(url_for('login'))
     return render_template('signuppage.html',form=form,title='Register')
 
+@app.route('/forum')
+def forum():
+    return render_template('forumhome.html',title='Forum')
+
+
 
 @app.route('/contact')
 def contactus():
