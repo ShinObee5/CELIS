@@ -71,9 +71,10 @@ def forum():
     threads=thread.query.all()
     return render_template('forumhome.html',title='Forum',threads=threads)
 
-@app.route('/thread')
-def forum_():
-    return render_template('forum.html',title='Forum')
+@app.route('/thread/<int:thread_id>')
+def forum_(thread_id):
+        print(thread_id)
+        return render_template('forum.html',title='Forum')
 
 @app.route('/contact')
 def contactus():

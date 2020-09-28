@@ -14,7 +14,7 @@
     <h5 class="card-title">{{thread.subject}}</h5>
     <p class="card-text">{{thread.description}}</p>
     <p class="card-text">Created by {{thread.creator.user_role}} {{thread.creator.username}}</p>
-    <a href="#" class="btn btn-success">Check Out Forum</a>
+    <a href="{{url_for('forum_',thread_id=thread.id)}}" class="btn btn-success">Check Out Forum</a>
   </div>
 </div>
 <br>
