@@ -9,9 +9,9 @@
   {% if threads %}
   {% for thread in threads %}
   <div class="card">
-  <h5 class="card-header">Number of Participants</h5>
+  <h5 class="card-header">{{thread.subject}} Community</h5>
   <div class="card-body">
-    <h5 class="card-title">{{thread.subject}}</h5>
+
     <p class="card-text">{{thread.description}}</p>
     <p class="card-text">Created by {{thread.creator.user_role}} {{thread.creator.username}}</p>
     <a href="{{url_for('forum_',thread_id=thread.id)}}" class="btn btn-success">Check Out Forum</a>
@@ -23,9 +23,8 @@
 <h1>OOps Some Error Occured</h1>
 {% endif %}
 
-
-<h3><a href="#">Click Here to make your own Forum</a></h3>
 </div>
+<a href="{{url_for('contactus')}}" class="btn btn-success">Request a new forum</a>
 
 
 {%endblock%}

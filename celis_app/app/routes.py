@@ -6,7 +6,7 @@ from app.models import User,thread,post
 from app.forms import LoginForm,RegisterForm
 from werkzeug.urls import url_parse
 from app import db
-
+from wtforms.validators import ValidationError
 @app.route('/')
 @app.route('/index')
 def index():
@@ -67,23 +67,29 @@ def register():
     return render_template('signuppage.html',form=form,title='Register')
 
 @app.route('/forum')
+@login_required
 def forum():
     threads=thread.query.all()
     return render_template('forumhome.html',title='Forum',threads=threads)
 
 @app.route('/thread/<int:thread_id>',methods=['POST','GET'])
+@login_required
 def forum_(thread_id):
         posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
         if(request.method=='POST'):
             print(request.form.get('message'))
-            BelongsTo=thread.query.filter_by(id=thread_id).first()
-            Author=User.query.filter_by(id=current_user.id).first()
-            p=post(message=request.form.get('message'),user_id=current_user.id,thread_id=thread_id,BelongsTo=BelongsTo,Author=Author)
-            print(p)
-            db.session.add(p)
-            db.session.commit()
+            if len(request.form.get('message'))==0 :
+                flash('Please Type Something',category="danger")
+            else:
+                BelongsTo=thread.query.filter_by(id=thread_id).first()
+                Author=User.query.filter_by(id=current_user.id).first()
+                p=post(message=request.form.get('message'),user_id=current_user.id,thread_id=thread_id,BelongsTo=BelongsTo,Author=Author)
+                print(p)
+                db.session.add(p)
+                db.session.commit()
         return render_template('forum.html',title='Forum',posts=posts)
 
 @app.route('/contact')
+@login_required
 def contactus():
     return render_template('contactus.html',title='Contact Us')
