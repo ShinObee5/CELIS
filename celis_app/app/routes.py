@@ -93,3 +93,11 @@ def forum_(thread_id):
 @login_required
 def contactus():
     return render_template('contactus.html',title='Contact Us')
+
+@app.route('/thread/<int:thread_id>/delete_post/<int:post_id>')
+@login_required
+def delete_post(post_id,thread_id):
+    p=post.query.filter_by(id=post_id).first()
+    db.session.delete(p)
+    db.session.commit()
+    return redirect(url_for('forum_',thread_id=thread_id))
