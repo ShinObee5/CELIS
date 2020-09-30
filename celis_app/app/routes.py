@@ -2,7 +2,7 @@ from app import app
 from flask import request,redirect,url_for,render_template,flash,get_flashed_messages,flash
 from app import forms
 from flask_login import current_user,login_user,logout_user,login_required
-from app.models import User,thread
+from app.models import User,thread,post
 from app.forms import LoginForm,RegisterForm
 from werkzeug.urls import url_parse
 from app import db
@@ -71,10 +71,18 @@ def forum():
     threads=thread.query.all()
     return render_template('forumhome.html',title='Forum',threads=threads)
 
-@app.route('/thread/<int:thread_id>')
+@app.route('/thread/<int:thread_id>',methods=['POST','GET'])
 def forum_(thread_id):
-        print(thread_id)
-        return render_template('forum.html',title='Forum')
+        posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
+        if(request.method=='POST'):
+            print(request.form.get('message'))
+            BelongsTo=thread.query.filter_by(id=thread_id).first()
+            Author=User.query.filter_by(id=current_user.id).first()
+            p=post(message=request.form.get('message'),user_id=current_user.id,thread_id=thread_id,BelongsTo=BelongsTo,Author=Author)
+            print(p)
+            db.session.add(p)
+            db.session.commit()
+        return render_template('forum.html',title='Forum',posts=posts)
 
 @app.route('/contact')
 def contactus():

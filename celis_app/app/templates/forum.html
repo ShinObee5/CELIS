@@ -4,30 +4,24 @@
   <link rel="stylesheet" href="{{url_for('static',filename='css/forumpage.css')}}">
   <div class="container">
 <br>
-    <div class="notuser">
-      <span><strong><u>Adithya:</u></strong></span>
-      <p>hey WTF forms are great isnt it</p>
-    </div>
-
+  {% for post in posts %}
+  {% if post.Author.id==current_user.id %}
     <div class="user">
-      <span><strong><u>Adithya:</u></strong></span>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <span><strong><u>{{post.Author.username}}/{{post.time}}</u></strong></span>
+      <p>{{post.message}}</p>
     </div>
-
+    {% else %}
     <div class="notuser">
-      <span><strong><u>Adithya:</u></strong></span>
-      <p>hey WTF forms are great isnt it</p>
+      <span><strong><u>{{post.Author.username}}/{{post.time}}</u></strong></span>
+      <p>{{post.message}}</p>
     </div>
+    {% endif %}
+    {% endfor %}
 
-    <div class="notuser">
-      <span><strong><u>Adithya:</u></strong></span>
-      <p>hey WTF forms are great isnt it</p>
-    </div>
-
-    <form class="form-inline">
+    <form class="form-inline" method="POST">
   <div class="form-group mx-sm-3 mb-2">
     <label for="message" class="sr-only">Enter Message</label>
-    <input type="text" class="form-control" id="message" placeholder="Enter Message">
+    <input type="text" name='message' class="form-control" id="message" placeholder="Enter Message">
   </div>
   <button type="submit" class="btn btn-primary mb-2">Send</button>
 </form>
