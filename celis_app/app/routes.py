@@ -87,6 +87,8 @@ def forum_(thread_id):
                 print(p)
                 db.session.add(p)
                 db.session.commit()
+            posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
+            return redirect(url_for('forum_',title='Forum',posts=posts,thread_id=thread_id))
         return render_template('forum.html',title='Forum',posts=posts)
 
 @app.route('/contact')
