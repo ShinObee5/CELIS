@@ -1,5 +1,5 @@
 from app import app
-from flask import request,redirect,url_for,render_template,flash,get_flashed_messages,flash
+from flask import request,redirect,url_for,render_template,flash,get_flashed_messages,flash,jsonify
 from app import forms
 from flask_login import current_user,login_user,logout_user,login_required
 from app.models import User,thread,post
@@ -88,8 +88,9 @@ def forum_(thread_id):
                 db.session.add(p)
                 db.session.commit()
             posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
-            return redirect(url_for('forum_',title='Forum',posts=posts,thread_id=thread_id))
+            return redirect(request.referrer)
         return render_template('forum.html',title='Forum',posts=posts)
+
 
 @app.route('/contact')
 @login_required
