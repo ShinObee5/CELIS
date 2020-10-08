@@ -1,4 +1,4 @@
-from app import app,db
+from app import app,db,socketio
 from app.models import User,thread,post
 
 
@@ -8,4 +8,4 @@ def make_shell_context():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app,log_output=True)

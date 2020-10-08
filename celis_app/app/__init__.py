@@ -3,10 +3,15 @@ from config import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_socketio import SocketIO,send
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 #general configs
 app=Flask(__name__)
 app.config.from_object(config)
+from flask_socketio import SocketIO,send
+socketio=SocketIO(app,engineio_logger=True,logger=True)
 #DB Configs
 db=SQLAlchemy(app)
 migrate=Migrate(app,db)
