@@ -17,6 +17,13 @@ def index():
 def course():
     return render_template('courses.html',title='Courses')
 
+@app.route('/profile/')
+def profile():
+    if current_user.user_role=="Instructor":
+        return render_template('profile_instructor.html',title=current_user.username[:3])
+    elif current_user.user_role=="Student" :
+        return render_template('profile_student.html',title=current_user.username[:3])
+
 
 
 @app.route('/logout')
