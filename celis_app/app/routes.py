@@ -1,11 +1,10 @@
-from app import app
+from app import app,forms,db,socketio
+from flask_socketio import emit,leave_room,join_room
 from flask import request,redirect,url_for,render_template,flash,get_flashed_messages,flash,jsonify
-from app import forms
 from flask_login import current_user,login_user,logout_user,login_required
 from app.models import User,thread,post
 from app.forms import LoginForm,RegisterForm
 from werkzeug.urls import url_parse
-from app import db
 from wtforms.validators import ValidationError
 @app.route('/')
 @app.route('/index')
@@ -16,6 +15,13 @@ def index():
 @login_required
 def course():
     return render_template('courses.html',title='Courses')
+
+@app.route('/profile/')
+def profile():
+    if current_user.user_role=="Instructor":
+        return render_template('profile_instructor.html',title=current_user.username[:3])
+    elif current_user.user_role=="Student" :
+        return render_template('profile_student.html',title=current_user.username[:3])
 
 
 
@@ -76,20 +82,8 @@ def forum():
 @login_required
 def forum_(thread_id):
         posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
-        if(request.method=='POST'):
-            print(request.form.get('message'))
-            if len(request.form.get('message'))==0 :
-                flash('Please Type Something',category="danger")
-            else:
-                BelongsTo=thread.query.filter_by(id=thread_id).first()
-                Author=User.query.filter_by(id=current_user.id).first()
-                p=post(message=request.form.get('message'),user_id=current_user.id,thread_id=thread_id,BelongsTo=BelongsTo,Author=Author)
-                print(p)
-                db.session.add(p)
-                db.session.commit()
-            posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
-            return redirect(request.referrer)
-        return render_template('forum.html',title='Forum',posts=posts)
+        thread_name=thread.query.filter_by(id=thread_id).first().subject
+        return render_template('forum.html',title='Forum',posts=posts,room=thread_name)
 
 
 @app.route('/contact')
@@ -97,10 +91,33 @@ def forum_(thread_id):
 def contactus():
     return render_template('contactus.html',title='Contact Us')
 
-@app.route('/thread/<int:thread_id>/delete_post/<int:post_id>')
-@login_required
-def delete_post(post_id,thread_id):
-    p=post.query.filter_by(id=post_id).first()
-    db.session.delete(p)
+#socket events
+
+@socketio.on('join')
+def join_room_(data):
+    join_room(data['room'])
+    socketio.emit('status',data,room=data['room'],dif_user=0)
+
+@socketio.on('leave')
+def leave_room_(data):
+    leave_room(data['room'])
+    print('User gonna leave')
+    socketio.emit('left_room_announcement',data,room=data['room'],dif_user=0)
+
+@socketio.on('send_message')
+def send_message(data):
+    user_=User.query.filter_by(username=data['username']).first()
+    thread_=thread.query.filter_by(subject=data['room']).first()
+    p=post(message=data['message'],user_id=user_.id,thread_id=thread_.id)
+    db.session.add(p)
     db.session.commit()
-    return redirect(url_for('forum_',thread_id=thread_id))
+    p=post.query.filter_by(message=data['message'],user_id=user_.id,thread_id=thread_.id).first()
+    socketio.emit('received_message',{'room':data['room'],'user_id':p.user_id,'username':user_.username,'msg':p.message,'post_id':p.id,'thread_id':thread_.id},room=data['room'],dif_user=p.user_id)
+
+@socketio.on('remove')
+def remove_post(data):
+    id=int(data['post_id'].split('f')[1])
+    post_=post.query.filter_by(id=id).first()
+    db.session.delete(post_)
+    db.session.commit()
+    socketio.emit('confirm_remove',{"id":data['post_id']},room=data['room'])
