@@ -13,13 +13,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../node_modules/bootstrap-social/bootstrap-social.css">
 
       </head>
-<<<<<<< HEAD
-    <body style="margin-top: 60px";>
-=======
-    <body style="margin-top: 60px;">
->>>>>>> 55a813df6a7109b729511c5e9aa588dd2e411305
+    <body style="margin-top: 60px">
       <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href="{{url_for('index')}}">
     <img src="../static/images/celislogo.png" width="70" height="30" class="d-inline-block align-top" alt="" loading="lazy">
@@ -32,24 +30,24 @@
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
             <li class="nav-item ">
-              <a class="nav-link" href="{{url_for('index')}}">Home </a>
+              <a class="nav-link" href="{{url_for('index')}}"><span class="fa fa-home">Home </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('course')}}">Courses</a>
+              <a class="nav-link" href="{{url_for('course')}}"><span  class="fa fa-book" ></span>Courses</a>
             </li>
             {% if current_user.is_anonymous %}
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('login')}}">SignIn/SignUp</a>
+              <a class="nav-link" href="{{url_for('login')}}"><span class="fa fa-sign-in"></span>SignIn/SignUp</a>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('logout')}}">SignOut</a>
+              <a class="nav-link" href="{{url_for('logout')}}"><span class="fa fa-sign-out"></span>SignOut</a>
             </li>
             {% endif %}
             {% if current_user.is_authenticated %}
             <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Hey, {{current_user.username}}
+        <span class="fa fa-user"></span> Hey, {{current_user.username}}
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{{url_for('profile')}}">Profile</a>
@@ -60,14 +58,14 @@
     </li>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('forum')}}">Forum</a>
+              <a class="nav-link" href="{{url_for('forum')}}"><span class="fa fa-comment"></span>Forum</a>
             </li>
           </ul>
           <form class="form-inline ml-auto">
         <div class="md-form my-0">
           <input class="form-control" type="text" placeholder="Search" aria-label="Search">
         </div>
-        <button href="#!" class="btn btn-info btn-pill btn-md my-0 ml-sm-2" type="submit">Search</button>
+        <button href="#!" class="btn btn-info btn-pill btn-md my-0 ml-sm-2" type="submit"><span class="fa fa-search"></span></button>
       </form>
 
         </div>
@@ -181,19 +179,15 @@
                             <br>
                             <br>
                             <br>
-                            <br>
-                            <li>
-                              <a href="#!">LinkedIn</a>
-                            </li>
-                            <li>
-                              <a href="#!">Github</a>
-                            </li>
-                            <li>
-                              <a href="#!">Instagram</a>
-                            </li>
-                            <li>
-                              <a href="#!"></a>
-                            </li>
+                            
+                            <div class="text-center">
+                              <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+                              <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
+                              <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a>
+                              <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+                              <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube"></i></a>
+                              <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o"></i></a>
+                          </div>
                           </ul>
 
                         </div>
