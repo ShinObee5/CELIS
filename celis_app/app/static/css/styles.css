@@ -70,3 +70,15 @@ footer p{
     margin-bottom: -100px;
     padding-bottom: 100px;
 }
+
+
+
+
+
+
+
+/*Animations*/
+.fadeInUp{
+  animation-delay:4s ;
+  animation-duration: 3s;
+}
