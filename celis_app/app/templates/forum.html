@@ -1,7 +1,6 @@
 {% extends 'template.html' %}
 
 {% block body %}
-
   <link rel="stylesheet" href="{{url_for('static',filename='css/forumpage.css')}}">
   <div class="container" style="overflow:scroll;height:600px;">
 <br>
@@ -30,7 +29,7 @@
     <label for="message" class="sr-only">Enter Message</label>
     <input type="text" name='message' class="form-control" id="message" placeholder="Enter Message">
   </div>
-  <button type="submit" id="msgsub" class="btn btn-primary mb-2">Send</button>
+  <button type="submit" class="btn btn-primary mb-2">Send</button>
 </form>
   </div>
 
