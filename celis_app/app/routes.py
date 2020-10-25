@@ -6,8 +6,6 @@ from app.models import User,thread,post
 from app.forms import LoginForm,RegisterForm
 from werkzeug.urls import url_parse
 from wtforms.validators import ValidationError
-import pandas as pd
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -16,9 +14,7 @@ def index():
 @app.route('/courses')
 @login_required
 def course():
-    df=pd.read_csv("C:\\Users\\HP\\Desktop\\WebdevCourses.csv")
-    
-    return render_template('courses.html',title='Courses',course_title=df[:,0])
+    return render_template('courses.html',title='Courses')
 
 @app.route('/profile/')
 def profile():
@@ -86,25 +82,9 @@ def forum():
 @login_required
 def forum_(thread_id):
         posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
-<<<<<<< HEAD
-        if(request.method=='POST'):
-            print(request.form.get('message'))
-            if len(request.form.get('message'))==0 :
-                flash('Please Type Something',category="danger")
-            else:
-                BelongsTo=thread.query.filter_by(id=thread_id).first()
-                Author=User.query.filter_by(id=current_user.id).first()
-                p=post(message=request.form.get('message'),user_id=current_user.id,thread_id=thread_id,BelongsTo=BelongsTo,Author=Author)
-                print(p)
-                db.session.add(p)
-                db.session.commit()
-            posts=post.query.filter_by(thread_id=thread_id).order_by(post.time.asc())
-            return redirect(url_for('forum_',title='Forum',posts=posts,thread_id=thread_id))
-        return render_template('forum.html',title='Forum',posts=posts)
-=======
         thread_name=thread.query.filter_by(id=thread_id).first().subject
         return render_template('forum.html',title='Forum',posts=posts,room=thread_name)
->>>>>>> merge_test
+
 
 @app.route('/contact')
 @login_required
