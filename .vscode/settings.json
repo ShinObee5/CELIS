@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "compile-hero.disable-compile-files-on-did-save-code": false
+=======
+    "python.pythonPath": "E:\\Python01\\envs\\flaskenv\\python.exe"
+>>>>>>> 82118743dca8b476ee4ba9be2fd73dbbc617f52d
 }
